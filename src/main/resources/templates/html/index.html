@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang = "en">
+<head>
+<meta charset="UTF-8">
+<title>柴方贵的Ajax页面</title>
+</head>
+<body>
+	<h2>欢迎使用柴方贵的坑人技术又提高了</h2>
+	
+	
+	<div>
+	<form>
+		<label for = "username"> 用户名：
+			<input type = "text" id = "username" name = "username">
+		</label>
+		
+		<label for = "password"> 密码：
+			<input type = "password" id = "password" name = "password">
+		</label>
+		<button  type = "button" id = "btn" name = "btn">提交</button>
+	</form>
+	</div>
+	<div>
+		<form>
+			<input type = "text" id = "regusername" name = "regusername" placeholder = "请输入用户名">
+			<input type = "password" id = "regpassword" name = "regpassword" placeholder = "请输入密码">
+			<input type = "password" id = "confirmpassword" name = "confirmpassword" placeholder = "请确认密码">
+			
+			<button  type = "button" id = "regbtn" name = "regbtn">注册用户</button>
+		</form>
+		
+	</div>
+	
+	
+	<script  type = "text/javascript" th:src = "@{/webjars/jquery/3.6.1/dist/jquery.min.js}"></script>
+	<script type="text/javascript">
+		btn.onclick = function(){
+		var username = $('#username').val();
+		var password = $('#password').val();
+		console.log(username);
+		console.log(password);
+		url = "/userlogin";
+		method = "post";
+		var param = {
+			"username":username,
+			"password":password
+		}
+		console.log("开始发送ajax请求");
+		$.post(
+			url,
+			param,
+			function(res){
+				console.log("进入到回调函数");
+				console.log(res);
+				console.log(res.code);
+				if(res.code==200){
+					top.location.href="/loginsuccess";
+					alert("登录成功");
+				}else{
+					console.log(res.message);
+					alert(res.message);
+				}
+			}	
+		);
+	}
+		regbtn.onclick = function (){
+			var regusername = $('#regusername').val();
+			var regpassword = $('#regpassword').val();
+			var confirmpassword = $('#confirmpassword').val();
+			console.log(regpassword);
+			console.log(confirmpassword);
+			if(confirmpassword == regpassword){
+				console.log("两次密码一致");
+				
+				var url = "/registeruser";
+				var param = {
+						"regusername":regusername,
+						"regpassword":regpassword
+				}
+				$.post(
+					url,
+					param,
+					function(res){
+						if(res.code==200){
+							console.log("注册方法执行完成");
+							alert(res.message);
+						}else{
+							console.log("用户注册失败");
+							alert("注册失败了，自己想办法解决");
+						}
+					}
+					
+				)
+			}else{
+				console.log("两次密码不一致");
+				alert("两次的密码不一致");
+				
+			}
+			
+		}
+		
+	</script>
+
+	
+	
+	
+	
+</body>
+</html>
