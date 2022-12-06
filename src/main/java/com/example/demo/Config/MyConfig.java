@@ -10,10 +10,13 @@ public class MyConfig implements WebMvcConfigurer  {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(new LoginInterceptor())
-				.addPathPatterns("/**") // 拦截所有
-				.excludePathPatterns("/","/userlogin**","/webjars**"); //排除该登录地址或添加其他
-		
+				.addPathPatterns("/userlogin")
+				.addPathPatterns("/**")
 				
+				.excludePathPatterns("/","/userlogin**","/**/webjars**"); //排除该登录地址或添加其他
+		
+				;
+				WebMvcConfigurer.super.addInterceptors(registry);
 		
 	}
 }
