@@ -29,7 +29,7 @@ public class IndexController {
 		
 		HttpSession session = req.getSession();
 		System.out.println("登录页session"+session);
-		System.out.println(session.getAttribute("userinfo"));
+		System.out.println("这里是首页输出的session"+session.getAttribute("userinfo"));
 		
 		return "/html/index.html";
 	}
