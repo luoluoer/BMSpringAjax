@@ -23,8 +23,8 @@ public class RegisterUserController {
 	@Autowired
 	RegisterUserMapper ru;
 	@PostMapping("/registeruser")
-	public HashMap<String,Object> login (HttpServletRequest req) {
-		System.out.println("page logincontroller");
+	public HashMap<String,Object> registeruser (HttpServletRequest req) {
+		System.out.println("page registerusercontroller");
 		System.out.println(req.getMethod());
 		HashMap<String, Object> registermessage = new HashMap<>();
 		String username = req.getParameter("regusername");
@@ -32,7 +32,7 @@ public class RegisterUserController {
 		String confirmpassword = req.getParameter("confirmpassword");
 		if (!(password.equals(confirmpassword))) {
 			registermessage.put("code", 200);
-			registermessage.put("message", "后台报错用户名密码不一致");
+			registermessage.put("message", "后台报错两次密码不一致");
 			
 		}
 		List<UserInfo> us = ru.getUserInfoByUsername(username);
