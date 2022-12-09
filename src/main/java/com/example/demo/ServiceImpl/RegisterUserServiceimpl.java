@@ -14,7 +14,7 @@ public class RegisterUserServiceimpl implements RegisterUserService{
 	@Autowired
 	RegisterUserMapper ru;
 	
-	HashMap<String, Object> hm;
+	HashMap<String, Object> hm = new HashMap<>();
 	@Override
 	
 	public boolean confirmpassword(String password, String confirmpassword) {
@@ -49,7 +49,7 @@ public class RegisterUserServiceimpl implements RegisterUserService{
 			hm.put("message", "两次输入的密码不一致");
 			return hm;
 		}
-		List<UserInfo> us = ru.getUserInfoByUsername(username);
+		List<UserInfo> us = selectuserinfobyusername(username);
 		if (us.size()>0) {
 			hm.put("code", 200);
 			hm.put("message", "已经存在此用户，请直接登录");
