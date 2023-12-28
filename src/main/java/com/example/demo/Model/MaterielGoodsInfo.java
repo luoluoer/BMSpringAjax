@@ -1,5 +1,7 @@
 package com.example.demo.Model;
 
+import com.baomidou.mybatisplus.annotation.TableName;
+
 import lombok.Data;
 
 /**
@@ -8,6 +10,7 @@ import lombok.Data;
 * @version 创建时间：2022年11月23日 下午8:57:30
 */
 @Data
+@TableName("MaterielGoodsInfo")
 public class MaterielGoodsInfo {
 	private  int id;
 	private String comment;

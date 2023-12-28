@@ -6,7 +6,6 @@ import java.util.List;
 import javax.imageio.spi.RegisterableService;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,12 +32,23 @@ public class RegisterUserController {
 			HttpServletRequest req ,
 			@RequestParam(value = "regusername") String regusername,
 			@RequestParam(value = "regpassword") String regpassword,
-			@RequestParam(value = "confirmpassword") String confirmpassword
-			) {
+			@RequestParam(value = "confirmpassword") String confirmpassword,
+			@RequestParam(value = "realname") String realname
+			
+			)  
+	{	
+		//后期通过basemapper.insert直接插入
+		//UserInfo userinfo = new UserInfo(regusername,regpassword,realname);
+		
 		System.out.println("page registerusercontroller");
+		System.out.println(regusername);
+		System.out.println(regpassword);
+		System.out.println(confirmpassword);
 		System.out.println(req.getMethod());
 		HashMap<String, Object> registermessage = new HashMap<>();
-
-		return rs.registeruser(regusername, regpassword, confirmpassword);
+		//System.out.println(rs.registeruser(regusername, regpassword, confirmpassword));
+		//return rs.registeruser(regusername, regpassword, confirmpassword);
+		registermessage = rs.registeruser(regusername, regpassword, confirmpassword);
+		return registermessage;
 	}
 }

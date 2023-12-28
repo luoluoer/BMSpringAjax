@@ -10,27 +10,34 @@ import javax.servlet.http.HttpSession;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpServerErrorException;
 
 import com.example.demo.Mapper.RegisterUserMapper;
+import com.example.demo.Model.MaterielGoodsInfo;
 import com.example.demo.Model.UserInfo;
 
 import com.example.demo.Service.UserLoginService;
 @RestController
-public class UserLoginController {
+public class UserLoginController_bak {
 	@Autowired
 	RegisterUserMapper ru ;
 	@Autowired
 	UserLoginService userlogin;
 	List<UserInfo> userinfo = new ArrayList<>();
 	HashMap<String, Object> hm = new HashMap<>();
-	@RequestMapping("/userlogin")
-	public HashMap<String, Object> uerlogin(HttpServletRequest req,HttpSession session) {
+	@PostMapping("/userlogin_bak")
+	public HashMap<String, Object> uerlogin  (HttpServletRequest req,HttpSession session) {
+		
+		
+		System.out.println(userinfo);
 		String username = req.getParameter("username");
 		
 		String password = req.getParameter("password");
+		System.out.println(username);
+		System.out.println(password);
 		hm  = userlogin.validateAccount(username, password,req,session);
 //		if(validateAccount(username,password)) {
 //			System.out.println("这里是判断登录返回的hm:"+hm);
